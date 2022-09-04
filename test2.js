@@ -55,7 +55,7 @@ function parsajKoordinati(koordinati) {
     latlng = latlng.replace("N", "ž").replace("S", "ž").replace("E", "").replace("W", "");
     latlng = latlng.split("ž");
     đ = latlng[0];
-    console.log(latlng);
+    //console.log(latlng);
     //lat = preS * parseFloat(insert(latlng[0], 2, "."));
     //lng = preD * parseFloat(insert(latlng[1], 3, "."));
 
@@ -67,7 +67,7 @@ function parsajKoordinati(koordinati) {
 
     if(Math.round(lng) > 900) lng = lng/10;
 
-    console.log(lat, lng);
+    //console.log(lat, lng);
     return([lat, lng]);
 }
 
@@ -90,7 +90,7 @@ function narisi(data) {
             }
 
             shape = L.polygon(policoord, {"color": BARVE_border[d.TIP], "fillColor": BARVE[d.TIP]}).addTo(mymap);
-            console.log(d.IME, policoord);
+            //console.log(d.IME, policoord);
         }
         shape.bindPopup(`<b>${d.IME}</b><br>${d.INFORMACIJE}`);
     }

@@ -5,6 +5,9 @@
 	<meta name="author" content="Žan Žnidar">
 	<title>ThaiNoFlai</title>
 	<meta name="description" content="Map of drone prohibition and no-flight zones">
+	<link rel="shortcut icon" href="icons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="196x196" href="icons/favicon-192.png">
+    <link rel="manifest" href="manifest.webmanifest" />
 
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -32,17 +35,16 @@
 	<p id="log">Ta stran deluje samo preko https:// protokola (ne pa tudi file:///).<br></p>
 	
 
-</body>
-
-
-<script>
-// Uporabne funkcije, src nekaterih: https://www.scirra.com/manual/126/system-expressions
-
-/*lerp = function(a, b, x) {
-	return(a + x * (b - a));
-}*/
-var lerp = (a, b, x) => (a + x * (b - a)); // Linear interpolation
-
+	
+	
+	<script>
+		// Uporabne funkcije, src nekaterih: https://www.scirra.com/manual/126/system-expressions
+		
+		/*lerp = function(a, b, x) {
+			return(a + x * (b - a));
+		}*/
+		var lerp = (a, b, x) => (a + x * (b - a)); // Linear interpolation
+		
 var qarp = (a, b, c, x) => (lerp(lerp(a, b, x), lerp(b, c, x), x)); // Quadratic interpolation
 
 var cubic = (a, b, c, d, x) => (lerp(qarp(a, b, c, x), qarp(b, c, d, x), x)); // Cubic interpolation
@@ -55,4 +57,35 @@ var plusminus = (p) => (Math.random() < p) ? -1 : 1; // Negate number or not (pr
 <script src="papaparse.min.js"></script>
 <script src="test2.js"></script>
 
+<script>
+	console.warn("Testiarm");
+</script>
+
+<script>
+	console.log("TESTSET1");
+	// Caching https://github.com/AshleyScirra/scirra-offline-sw
+	navigator.serviceWorker.register("sw.js", { scope: "./" });
+	console.log("TESTSET2");
+	
+	let broadcastChannel = new BroadcastChannel("offline");
+	broadcastChannel.onmessage = function (e)
+	{
+		const data = e.data;
+		const messageType = data.type;
+		
+		console.log(data, messageType);
+		
+		// messageType can be:
+		// "downloading-update": has started downloading a new version in the background
+		//     (data.version indicates which)
+		// "update-ready": an update has finished downloading in the background and is
+		//     now ready to use after a reload (data.version indicates which)
+		// "update-pending": an update is available but needs a reload to start using it
+		// "up-to-date": identified that the latest version is already in use
+		// "downloading": started first-time caching of the current version for offline use
+		// "offline-ready": finished first-time caching, so app can now work offline
+	};
+</script>
+
+</body>
 </html>
