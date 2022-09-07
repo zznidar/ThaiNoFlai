@@ -102,7 +102,8 @@ Papa.parse("ThailandNoFly_4.csv", {
     header: true,
 	complete: function(results) {
 		console.log(results);
-        narisi(results.data);
+        // Data is written P, R, D; draw them front-to-back
+        narisi(results.data.reverse());
 	}
 });
 
