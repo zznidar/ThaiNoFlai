@@ -1,5 +1,5 @@
 {
-	"version": 1,
+	"version": 2,
 	"fileList": [
 		"index.html",
         "manifest.webmanifest",
